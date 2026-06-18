@@ -25,9 +25,9 @@
     }
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.23.9/babel.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
   <style>
     *{box-sizing:border-box}
@@ -43,9 +43,22 @@
     .modal-bg{position:fixed;inset:0;background:rgba(44,66,60,0.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px}
     input[type="date"]::-webkit-calendar-picker-indicator{opacity:0.5;cursor:pointer}
   </style>
+  <script>
+    window.addEventListener('error', function(e) {
+      var loading = document.getElementById('loading');
+      if (loading) {
+        loading.innerHTML = '<div style="text-align:center;padding:32px;font-family:Georgia,serif;color:#50808e"><div style="font-size:32px;margin-bottom:12px">🌿</div><div style="font-size:16px;font-weight:600;margin-bottom:8px">Kamilly & Mariana</div><div style="font-size:12px;color:#6b8c82;font-family:Inter,sans-serif">Erro ao carregar: ' + (e.message||'') + '<br><br>Tente recarregar a página.</div></div>';
+      }
+    });
+  </script>
 </head>
 <body>
 <div id="root"></div>
+<div id="loading" style="position:fixed;inset:0;background:#edeae0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:999">
+  <div style="font-family:'Inter',sans-serif;font-size:28px">🌿</div>
+  <div style="font-family:Georgia,serif;font-size:16px;color:#50808e;font-weight:600">Kamilly &amp; Mariana</div>
+  <div style="font-size:11px;color:#6b8c82;letter-spacing:.1em;text-transform:uppercase">Carregando...</div>
+</div>
 
 <script type="text/babel">
 const { useState, useEffect, useCallback, useMemo, useRef } = React;
@@ -676,7 +689,11 @@ function App(){
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+const _root = ReactDOM.createRoot(document.getElementById('root'));
+_root.render(<App/>);
+// Hide loading screen
+const _loading = document.getElementById('loading');
+if (_loading) _loading.style.display = 'none';
 </script>
 
 <!-- FIREBASE MODULE -->
