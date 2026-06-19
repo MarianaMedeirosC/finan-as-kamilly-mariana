@@ -622,6 +622,7 @@ function App(){
           </div>
           <div style={{display:'flex',alignItems:'center',gap:8,flexShrink:0}}>
             {/* Session selector */}
+            <img src={IMG.money} style={{width:28,height:28,objectFit:'contain',flexShrink:0}}/>
             <div style={{background:'rgba(255,255,255,.6)',borderRadius:9999,padding:3,display:'flex',gap:3,border:'1px solid '+P.green1}}>
               {['Mariana','Kamilly'].map(u=>(
                 <button key={u} onClick={()=>setSession(u)} style={{padding:'5px 12px',borderRadius:9999,border:'none',cursor:'pointer',fontSize:11,fontWeight:700,transition:'all .2s',minHeight:30,background:session===u?P.accent:'transparent',color:session===u?'#fff':P.muted,fontFamily:'Inter,sans-serif'}}>
